@@ -8,7 +8,7 @@ x64/
 x86/
 Debug/
 Release/
-transcend/
+god/
 packages/
 *.user
 *.suo

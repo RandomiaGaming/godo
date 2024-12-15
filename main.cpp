@@ -661,16 +661,23 @@ int main(int argc, char** argv) {
 
 	// Get command line minus the process name
 	std::wostringstream commandLineStream = { };
-	for (int i = 1; i < argc; i++) {
-		if (i >= 2) {
-			commandLineStream << " ";
+	if (argc > 1) {
+		for (int i = 1; i < argc; i++) {
+			if (i >= 2) {
+				commandLineStream << " ";
+			}
+			commandLineStream << "\"" << argv[i] << "\"";
 		}
-		commandLineStream << "\"" << argv[i] << "\"";
+	}
+	else {
+		commandLineStream << "\"C:\\Windows\\System32\\cmd.exe\"";
 	}
 	std::wstring commandLineString = commandLineStream.str();
 	LPWSTR commandLine = new WCHAR[commandLineString.size() + 1];
 	memcpy(commandLine, commandLineString.c_str(), commandLineString.size() * sizeof(WCHAR));
 	commandLine[commandLineString.size()] = '\0';
+
+
 
 	STARTUPINFOW si = { };
 	si.cb = sizeof(STARTUPINFOW);
